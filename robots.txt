@@ -1,4 +1,0 @@
-﻿User-agent: *
-Allow: /*.js$
-Allow: /*.css$
-Sitemap: https://safe731.github.io/sitemap.xml
