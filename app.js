@@ -1,75 +1,50 @@
-function randomCode(length = 7) {
-  const chars =
-  "abcdefghijklmnopqrstuvwxyz0123456789";
+function randomCode(length = 7){
 
-  let result = "";
+const chars =
+"abcdefghijklmnopqrstuvwxyz0123456789";
 
-  for(let i=0;i<length;i++){
-    result += chars.charAt(
-      Math.floor(Math.random()*chars.length)
-    );
-  }
+let result = "";
 
-  return result;
+for(let i=0;i<length;i++){
+
+result += chars.charAt(
+Math.floor(Math.random()*chars.length)
+);
+
+}
+
+return result;
+
 }
 
 async function generateLink(){
 
-  const url =
-  document.getElementById("url").value;
+const url =
+document.getElementById("url").value;
 
-  const fileName =
-  document.getElementById("filename").value;
+if(!url){
 
-  const fileSize =
-  document.getElementById("filesize").value;
+alert("Destination URL Required");
 
-  const delay =
-  document.getElementById("delay").value;
+return;
 
-  let code =
-  document.getElementById("customCode").value;
+}
 
-  if(!code){
-    code = randomCode();
-  }
+let code =
+document.getElementById("customCode").value;
 
-  const response = await fetch(
-    "https://s.safe731-shortlink-api.workers.dev/create",
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        code,
-        url,
-        fileName,
-        fileSize,
-        delay
-      })
-    }
-  );
+if(!code){
 
-  const data = await response.json();
+code = randomCode();
 
-  if(data.success){
+}
 
-    document.getElementById("result").innerHTML = `
-      <p>
-      Generated Link:
-      </p>
+document.getElementById("result").innerHTML =
 
-      <input
-      value="https://safe731.github.io/go/?id=${code}"
-      readonly>
+`<p>
+Generated Link: <br><br>
+https://safe731.github.io/go/?id=${code}
 
-    `;
-
-  }else{
-
-    alert("Error Creating Link");
-
-  }
+</p>`;
 
 }
